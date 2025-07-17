@@ -1,0 +1,37 @@
+body {
+    background-color: #ECFDF1;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto; /* automatische Höhe basierend auf dem Bildverhältnis */
+    object-fit: cover;
+    aspect-ratio: 4 / 3; /* alternativ: 4 / 3 oder was du brauchst */
+    display: block;
+
+    }
+    .modal-body img {
+        max-height: 300px;
+        width: 100%;
+        max-width: 100%; /* verhindert, dass das Bild breiter wird als der Container */
+        object-fit: cover;
+        margin-bottom: 1rem;
+        border-radius: 10px;
+    }
