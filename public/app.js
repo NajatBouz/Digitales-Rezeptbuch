@@ -29,14 +29,14 @@ function renderRezepte(rezepteArray) {
         col.className = "col-md-4";
 
         col.innerHTML = `
-            <div class="card h-100" data-id="${rezept.id}">
-                <img src="/bilder/${rezept.bild}" class="card-img-top" alt="${rezept.titel}">
-                <div class="card-body">
-                    <h5 class="card-title">${rezept.titel}</h5>
-                    <button class="btn btn-danger btn-sm mt-2 delete-btn">Löschen</button>
-                </div>
-            </div>
-        `;
+    <div class="card h-100" data-id="${rezept.id}">
+        <img src="${rezept.bild}" class="card-img-top" alt="${rezept.titel}">
+        <div class="card-body">
+            <h5 class="card-title">${rezept.titel}</h5>
+            <button class="btn btn-danger btn-sm mt-2 delete-btn">Löschen</button>
+        </div>
+    </div>
+`;
 
         // Klick auf Karte öffnet Modal
         col.querySelector(".card").addEventListener("click", () => {
@@ -84,7 +84,7 @@ document.getElementById('neues-rezept-form').addEventListener('submit', async (e
     const rezeptHTML = `
         <div class="col-md-4">
             <div class="card">
-                <img src="${bild}" class="card-img-top" alt="${titel}">
+                <img src="${rezept.bild}" class="card-img-top" alt="${titel}">
                 <div class="card-body">
                     <h5 class="card-title">${titel}</h5>
                     <button class="btn btn-primary" onclick="zeigeRezept('${titel}', '${zutaten.join('<br>')}', '${zubereitung.replace(/\n/g, '<br>')}')">Details anzeigen</button>
