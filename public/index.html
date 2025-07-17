@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bowls Rezeptbuch</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container py-5">
+    <header class="text-center mb-5">
+        <h1 class="display-4">🌿Najat's Bowl-Rezepte</h1>
+        <p class="lead">Frisch. Gesund. Lecker.</p>
+    </header>
+
+    <main>
+
+        <!-- Gesunde Bowls -->
+        <section class="mb-5">
+            <h2 class="mb-3">🥗 Gesunde Bowls</h2>
+            <div id="gesunde-bowls" class="row g-4"></div>
+        </section>
+    
+        <!-- Süße Bowls -->
+        <section class="mb-5">
+            <h2 class="mb-3">🍓 Süße Bowls</h2>
+            <div id="suesse-bowls" class="row g-4"></div>
+        </section>
+    
+        <!-- Herzhafte Bowls -->
+        <section class="mb-5">
+            <h2 class="mb-3">🍛 Herzhafte Bowls</h2>
+            <div id="herzhafte-bowls" class="row g-4"></div>
+        </section>
+    
+    </main>
+    
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="rezept-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rezept-modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="rezept-modal-body"></div>
+        </div>
+    </div>
+</div>
+
+
+<h3>Neues Rezept hinzufügen</h3>
+<form id="neues-rezept-form">
+  <div>
+    <label for="titel">Titel:</label><br>
+    <input type="text" id="titel" name="titel" required>
+  </div>
+  <div>
+    <label for="bild">Bild-URL:</label><br>
+    <input type="text" id="bild" name="bild" required>
+  </div>
+  <div>
+    <label for="kategorie">Kategorie:</label><br>
+    <select id="kategorie" name="kategorie" required>
+      <option value="gesund">Gesund</option>
+      <option value="suess">Süß</option>
+      <option value="herzhaft">Herzhaft</option>
+    </select>
+  </div>
+  <div>
+    <label for="zutaten">Zutaten (jede Zutat in eine neue Zeile):</label><br>
+    <textarea id="zutaten" name="zutaten" rows="4" required></textarea>
+  </div>
+  <div>
+    <label for="zubereitung">Zubereitung:</label><br>
+    <textarea id="zubereitung" name="zubereitung" rows="4" required></textarea>
+  </div>
+  <button type="submit">Rezept hinzufügen</button>
+</form>
+
+
+<footer style="background-color: #EFEDC6; padding: 20px; text-align: center; font-family: Arial, sans-serif; color: #555;">
+    <p>© 2025 Bowls Rezepte. Alle Rechte vorbehalten.🥑</p>
+    
+      
+  </footer>
+
+
+
+
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="app.js"></script>
+
+
+
+
+</body>
+</html>
