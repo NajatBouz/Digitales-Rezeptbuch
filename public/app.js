@@ -21,44 +21,6 @@ function renderRezepte(rezepteArray) {
         document.getElementById(id).innerHTML = "";
     });
 
-    document.getElementById('neues-rezept-form').addEventListener('submit', async (event) => {
-        event.preventDefault();
-      
-        // Formulardaten auslesen
-        const titel = document.getElementById('titel').value.trim();
-        const bild = document.getElementById('bild').value.trim();
-        const kategorie = document.getElementById('kategorie').value;
-        const zutatenText = document.getElementById('zutaten').value.trim();
-        const zubereitung = document.getElementById('zubereitung').value.trim();
-      
-        // Zutaten in Array umwandeln (Zeilen aufsplitten)
-        const zutaten = zutatenText.split('\n').map(z => z.trim()).filter(z => z.length > 0);
-      
-        // Neues Rezept-Objekt
-        const neuesRezept = { titel, bild, kategorie, zutaten, zubereitung };
-      
-        try {
-          const response = await fetch('/api/rezepte', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(neuesRezept)
-          });
-      
-          if (response.ok) {
-            alert('Rezept erfolgreich hinzugefügt!');
-            // Formular zurücksetzen
-            event.target.reset();
-            // Rezepte neu laden, um das neue Rezept anzuzeigen
-            ladeRezepte();
-          } else {
-            alert('Fehler beim Hinzufügen des Rezepts');
-          }
-        } catch (error) {
-          console.error('Fehler beim Hinzufügen:', error);
-          alert('Fehler beim Hinzufügen des Rezepts');
-        }
-      });
-
     rezepte.forEach((rezept) => {
         const container = getKategorieContainer(rezept.kategorie);
         if (!container) return;
@@ -101,22 +63,60 @@ function renderRezepte(rezepteArray) {
     });
 }
 
-function zeigeRezeptModal(id) {
-    const rezept = rezepte.find(r => r.id === id);
-    if (!rezept) return;
+// Ergänzungen hier einfügen
+document.getElementById('neues-rezept-form').addEventListener('submit', async (event) => {
+    event.preventDefault();
 
-    document.getElementById("rezept-modal-title").textContent = rezept.titel;
+    // Formulardaten auslesen
+    const titel = document.getElementById('titel').value.trim();
+    const bild = document.getElementById('bild').value.trim();
+    const kategorie = document.getElementById('kategorie').value;
+    const zutatenText = document.getElementById('zutaten').value.trim();
+    const zubereitung = document.getElementById('zubereitung').value.trim();
 
-    document.getElementById("rezept-modal-body").innerHTML = `
-        <img src="/bilder/${rezept.bild}" alt="${rezept.titel}" class="img-fluid mb-3">
-        <h6>Zutaten:</h6>
-        <ul>${rezept.zutaten.map(z => `<li>${z}</li>`).join("")}</ul>
-        <h6>Zubereitung:</h6>
-        <p>${rezept.zubereitung}</p>
+    // Zutaten in Array umwandeln (Zeilen aufsplitten)
+    const zutaten = zutatenText.split('\n').map(z => z.trim()).filter(z => z.length > 0);
+
+    // Neues Rezept-Objekt
+    const neuesRezept = { titel, bild, kategorie, zutaten, zubereitung };
+
+    // Rezept-HTML erstellen
+    const rezeptHTML = `
+        <div class="col-md-4">
+            <div class="card">
+                <img src="${bild}" class="card-img-top" alt="${titel}">
+                <div class="card-body">
+                    <h5 class="card-title">${titel}</h5>
+                    <button class="btn btn-primary" onclick="zeigeRezept('${titel}', '${zutaten.join('<br>')}', '${zubereitung.replace(/\n/g, '<br>')}')">Details anzeigen</button>
+                </div>
+            </div>
+        </div>
     `;
 
-    const modal = new bootstrap.Modal(document.getElementById("rezept-modal"));
-    modal.show();
+    // Rezept in die richtige Kategorie einfügen
+    if (kategorie === 'gesund') {
+        document.getElementById('gesunde-bowls').innerHTML += rezeptHTML;
+    } else if (kategorie === 'suess') {
+        document.getElementById('suesse-bowls').innerHTML += rezeptHTML;
+    } else if (kategorie === 'herzhaft') {
+        document.getElementById('herzhafte-bowls').innerHTML += rezeptHTML;
+    }
+
+    // Formular zurücksetzen
+    event.target.reset();
+});
+
+// Funktion, um Rezeptdetails im Modal anzuzeigen
+function zeigeRezept(titel, zutaten, zubereitung) {
+    document.getElementById('rezept-modal-title').innerText = titel;
+    document.getElementById('rezept-modal-body').innerHTML = `
+        <h5>Zutaten:</h5>
+        <p>${zutaten}</p>
+        <h5>Zubereitung:</h5>
+        <p>${zubereitung}</p>
+    `;
+    const rezeptModal = new bootstrap.Modal(document.getElementById('rezept-modal'));
+    rezeptModal.show();
 }
 
 async function ladeRezepte() {
