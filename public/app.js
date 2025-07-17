@@ -84,7 +84,7 @@ document.getElementById('neues-rezept-form').addEventListener('submit', async (e
     const rezeptHTML = `
         <div class="col-md-4">
             <div class="card">
-                <img src="${rezept.bild}" class="card-img-top" alt="${titel}">
+                <img src="${rezept.bild}" class="card-img-top" alt="${rezept.titel}">
                 <div class="card-body">
                     <h5 class="card-title">${titel}</h5>
                     <button class="btn btn-primary" onclick="zeigeRezept('${titel}', '${zutaten.join('<br>')}', '${zubereitung.replace(/\n/g, '<br>')}')">Details anzeigen</button>
